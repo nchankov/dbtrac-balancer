@@ -10,9 +10,9 @@ service nginx restart
 
 while true
 do
-    if [ -f /dbtrac/lb.change ]; then
+    if [ -f /etc/nginx/snippets/lb.change ]; then
         # Remove the triggering file
-        rm /dbtrac/lb.change
+        rm /etc/nginx/snippets/lb.change
         # Restart the server
         service nginx reload
     fi

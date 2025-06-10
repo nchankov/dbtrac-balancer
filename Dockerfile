@@ -10,16 +10,12 @@ COPY ./dbtrac.conf /etc/nginx/stream.conf.d/
 # Update nginx configuration file
 RUN echo "stream {\n\tinclude /etc/nginx/stream.conf.d/*.conf;\n}" >> /etc/nginx/nginx.conf
 
-# create the root directory
-RUN mkdir /dbtrac
-
 # Create RW and RO files
-RUN mkdir /dbtrac/snippets
-RUN touch /dbtrac/snippets/write.servers
-RUN touch /dbtrac/snippets/read.servers
-RUN echo "server localhost:3306;" >> /dbtrac/snippets/write.servers
-RUN echo "server localhost:3306;" >> /dbtrac/snippets/read.servers
-RUN chown nginx:nginx /dbtrac -Rf
+RUN mkdir /etc/nginx/snippets
+RUN touch /etc/nginx/snippets/write.servers
+RUN touch /etc/nginx/snippets/read.servers
+RUN echo "server localhost:3306;" >> /etc/nginx/snippets/write.servers
+RUN echo "server localhost:3306;" >> /etc/nginx/snippets/read.servers
 
 # Add listener for file uploads (remote configuration)
 COPY ./uploader.conf /etc/nginx/conf.d/
